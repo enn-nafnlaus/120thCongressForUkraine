@@ -31,18 +31,18 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .sub { color: var(--dim); margin-top: 6px; }
-  .key { width: 252px; flex: 0 0 auto; align-self: center;
+  .key { width: 252px; flex: 0 0 auto; align-self: center; flex-wrap: wrap;
     display: flex; flex-direction: row; align-items: center; gap: 14px;
     margin-left: auto;
     background: var(--panel2); border: 1px solid rgba(255,209,102,.28);
     border-radius: 12px; padding: 6px 12px; font-size: 12.5px; color: var(--dim);
   }
-  .key .row { display: flex; align-items: center; gap: 7px; }
+  .key .row { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; }
   .chip-swatch { width: 22px; height: 11px; border-radius: 6px; display: inline-block; }
   .chip-line { width: 22px; height: 3px; border-radius: 2px; display: inline-block; }
   .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,.35); }
 
-  .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 16px 21px 4px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 8px 10px 2px; }
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); font-weight: 600; }
   select, .slider-box {
@@ -51,13 +51,13 @@
     padding: 11px 14px; font-size: 15px; outline: none;
     backdrop-filter: blur(10px); box-shadow: 0 8px 26px rgba(0,0,0,.28);
   }
-  select { min-width: 210px; max-width: 235px; appearance: none; cursor: pointer; padding-right: 42px;
+  select { min-width: 260px; max-width: 300px; appearance: none; cursor: pointer; padding-right: 42px;
     background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
                       linear-gradient(135deg, var(--gold) 50%, transparent 50%);
     background-position: calc(100% - 22px) 22px, calc(100% - 16px) 22px;
     background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
   select option { background: #0a2c66; color: #f4f8ff; }
-  .slider-box { min-width: 195px; max-width: 215px; padding: 4px 14px 2px; }
+  .slider-box { min-width: 230px; max-width: 260px; padding: 4px 14px 2px; }
   input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 6px;
     background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--fill,50%), rgba(255,255,255,.18) var(--fill,50%));
     outline: none; margin: 14px 0 12px; }
@@ -68,7 +68,7 @@
     background: #fff; border: 3px solid var(--gold); cursor: pointer; }
 
   .chart-panel {
-    margin: 4px 21px 10px; padding: 2px 12px 2px;
+    margin: 2px 10px 6px; padding: 2px 12px 2px;
     background: var(--panel); border: 1px solid rgba(255,209,102,.22); border-radius: 18px;
     box-shadow: 0 18px 50px rgba(0,0,0,.32); backdrop-filter: blur(12px);
     overflow-x: auto;
@@ -85,16 +85,16 @@
   .chamber-title small { color: var(--dim); font-weight: 400; margin-left: 10px; font-size: 13.5px; }
   svg { display: block; width: 100%; height: auto; }
 
-  .scorebox { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; padding: 2px 21px 4px; text-align: right; }
+  .scorebox { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; padding: 1px 10px 2px; text-align: right; }
   .score-line { display: flex; align-items: baseline; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
-  .score-main { font-size: 34px; font-weight: 700; color: var(--gold); line-height: 1.1;
+  .score-main { font-size: 25px; font-weight: 700; color: var(--gold); line-height: 1.1;
     text-shadow: 0 2px 14px rgba(255,209,102,.25); font-variant-numeric: tabular-nums; }
   .score-ranges { color: var(--dim); font-size: 13.5px; font-variant-numeric: tabular-nums; }
   .score-examples { color: var(--ink); font-size: 13.5px; width: 100%; opacity: .92; }
   .score-examples .ex { margin: 3px 0; }
 
   .axis-line { stroke: rgba(255,209,102,.4); stroke-width: 1.5; }
-  .tick { fill: var(--faint); font-size: 13px; }
+  .tick { fill: var(--faint); font-size: 9.8px; }
   .band99 { fill: var(--gold-faint); }
   .band90 { fill: var(--gold-soft); }
   .median-line { stroke: var(--gold); stroke-width: 2.6; filter: drop-shadow(0 0 6px rgba(255,209,102,.5)); }

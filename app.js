@@ -95,13 +95,13 @@
       svg: document.getElementById("senateSvg"), sub: document.getElementById("senateSub"),
       scoreEl: document.getElementById("senateScore"), rangeEl: document.getElementById("senateRanges"),
       exEl: document.getElementById("senateExamples"),
-      w: 1600, h: 297, font: 12.35, pad: 13.3,
+      w: 1600, h: 193, font: 9.3, pad: 10,
     },
     house: {
       svg: document.getElementById("houseSvg"), sub: document.getElementById("houseSub"),
       scoreEl: document.getElementById("houseScore"), rangeEl: document.getElementById("houseRanges"),
       exEl: document.getElementById("houseExamples"),
-      w: 1600, h: 450, font: 7.2, pad: 6,
+      w: 1600, h: 360, font: 6.5, pad: 5.4,
     },
   };
   // ---------- simulation tuning (exposed for the layout tests) ----------
@@ -118,7 +118,7 @@
     vmaxSlow: 0.25,
     steps: 336,
   };
-  const MARGIN = { l: 70, r: 70, t: 2, b: 44 };
+  const MARGIN = { l: 70, r: 70, t: 0, b: 28 };
   // Temporary finder highlight: ?hi=<slug> or ?hi=statements (gold members with
   // a sourced statement on the current topic). Default 'statements' for now (remove later).
   const HILITE = (typeof location !== "undefined" ? new URLSearchParams(location.search).get("hi") : null) || "";
@@ -182,8 +182,10 @@
           const colW = Math.max(4, (group[0].hw * 2 + 2));
           group.forEach((it, gi) => {
             const col = gi % cols, row = Math.floor(gi / cols);
-            it.x = it.tx + (col - (cols - 1) / 2) * colW;
-            it.y = cy + ((row + (col % 2 ? 0.5 : 0)) - (rows - 1) / 2) * stepY * compress;
+            const top = MARGIN.t + it.hh + 2, bot = cfg.h - MARGIN.b - it.hh - 2;
+            const left = MARGIN.l + it.hw, right = cfg.w - MARGIN.r - it.hw;
+            it.x = Math.min(Math.max(it.tx + (col - (cols - 1) / 2) * colW, left), right);
+            it.y = Math.min(Math.max(cy + ((row + (col % 2 ? 0.5 : 0)) - (rows - 1) / 2) * stepY * compress, top), bot);
             if (initial) { it.vx = 0; it.vy = 0; }
           });
           runStart = i;
@@ -305,7 +307,7 @@
       g.appendChild(bandsG); g.appendChild(axisG); g.appendChild(marksG);
 
       const sx = sxFactory(cfg.w);
-      const ay = cfg.h - MARGIN.b + 18;
+      const ay = cfg.h - MARGIN.b + 6;
       const line = document.createElementNS(svgNS, "line");
       line.setAttribute("class", "axis-line");
       line.setAttribute("x1", sx(-1)); line.setAttribute("x2", sx(1));
@@ -315,11 +317,11 @@
         const t = document.createElementNS(svgNS, "line");
         t.setAttribute("class", "axis-line");
         t.setAttribute("x1", sx(v)); t.setAttribute("x2", sx(v));
-        t.setAttribute("y1", ay - 5); t.setAttribute("y2", ay + 5);
+        t.setAttribute("y1", ay - 4); t.setAttribute("y2", ay + 4);
         axisG.appendChild(t);
         const lab = document.createElementNS(svgNS, "text");
         lab.setAttribute("class", "tick");
-        lab.setAttribute("x", sx(v)); lab.setAttribute("y", ay + 18);
+        lab.setAttribute("x", sx(v)); lab.setAttribute("y", ay + 11);
         lab.setAttribute("text-anchor", "middle");
         lab.textContent = v === 0 ? "0 neutral" : v === -1 ? "\u22121 Russia" : v === 1 ? "+1 Ukraine" : (v > 0 ? "+" : "\u2212") + Math.abs(v).toFixed(2);
         axisG.appendChild(lab);
