@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ukraine Support in the 120th Congress</title>
+<style>
+  :root {
+    --bg0: #061c46; --bg1: #0a2c66; --panel: rgba(10,42,102,.55);
+    --panel2: rgba(255,209,102,.08);
+    --ink: #f4f8ff; --dim: #b7c6e6; --faint: #7d92bd;
+    --gold: #ffd166; --gold-soft: rgba(255,209,102,.32); --gold-faint: rgba(255,209,102,.14);
+    --blue: #4c9aff; --red: #ff5c6c; --gray: #b6a4ff; --teal: #58e0d2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(1100px 640px at 82% -8%, rgba(255,209,102,.16) 0%, rgba(255,209,102,0) 60%),
+      radial-gradient(1200px 720px at 12% -12%, #12418f 0%, rgba(18,65,143,0) 62%),
+      linear-gradient(165deg, var(--bg0), var(--bg1));
+    background-attachment: fixed;
+    color: var(--ink);
+    font: 15px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+  header { padding: 17px 21px 6px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  h1 {
+    margin: 0; font-size: 31px; letter-spacing: .3px; font-weight: 680;
+    background: linear-gradient(92deg, #ffe9a8, #ffd166 45%, #8fc0ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { color: var(--dim); margin-top: 6px; }
+  .key {
+    display: flex; flex-direction: row; align-items: center; gap: 14px;
+    margin-left: auto;
+    background: var(--panel2); border: 1px solid rgba(255,209,102,.28);
+    border-radius: 12px; padding: 6px 12px; font-size: 12.5px; color: var(--dim);
+  }
+  .key .row { display: flex; align-items: center; gap: 7px; }
+  .chip-swatch { width: 22px; height: 11px; border-radius: 6px; display: inline-block; }
+  .chip-line { width: 22px; height: 3px; border-radius: 2px; display: inline-block; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,.35); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 16px 21px 4px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); font-weight: 600; }
+  select, .slider-box {
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    color: var(--ink); border: 1px solid rgba(255,209,102,.38); border-radius: 12px;
+    padding: 11px 14px; font-size: 15px; outline: none;
+    backdrop-filter: blur(10px); box-shadow: 0 8px 26px rgba(0,0,0,.28);
+  }
+  select { min-width: 320px; appearance: none; cursor: pointer; padding-right: 42px;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+                      linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position: calc(100% - 22px) 22px, calc(100% - 16px) 22px;
+    background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+  select option { background: #0a2c66; color: #f4f8ff; }
+  .slider-box { min-width: 320px; padding: 4px 14px 2px; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 6px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--fill,50%), rgba(255,255,255,.18) var(--fill,50%));
+    outline: none; margin: 14px 0 12px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px;
+    border-radius: 50%; background: #fff; border: 3px solid var(--gold); cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,.45); }
+  input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; border: 3px solid var(--gold); cursor: pointer; }
+
+  .chart-panel {
+    margin: 4px 21px 10px; padding: 2px 12px 2px;
+    background: var(--panel); border: 1px solid rgba(255,209,102,.22); border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.32); backdrop-filter: blur(12px);
+    overflow-x: auto;
+  }
+  .chart-panel { position: relative; }
+  .chamber-title {
+    position: absolute; top: 6px; left: 10px; z-index: 5;
+    background: rgba(14, 20, 36, 0.78); border: 1px solid rgba(255, 209, 102, 0.22);
+    border-radius: 8px; padding: 3px 10px; font-size: 13px; pointer-events: none;
+    white-space: nowrap;
+  }
+  .chamber-title small { color: var(--dim); font-weight: 400; margin-left: 10px; font-size: 13.5px; }
+  svg { display: block; width: 100%; height: auto; }
+
+  .scorebox { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; padding: 2px 21px 4px; text-align: right; }
+  .score-line { display: flex; align-items: baseline; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .score-main { font-size: 34px; font-weight: 700; color: var(--gold); line-height: 1.1;
+    text-shadow: 0 2px 14px rgba(255,209,102,.25); font-variant-numeric: tabular-nums; }
+  .score-ranges { color: var(--dim); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  .score-examples { color: var(--ink); font-size: 13.5px; width: 100%; opacity: .92; }
+  .score-examples .ex { margin: 3px 0; }
+
+  .axis-line { stroke: rgba(255,209,102,.4); stroke-width: 1.5; }
+  .tick { fill: var(--faint); font-size: 13px; }
+  .band99 { fill: var(--gold-faint); }
+  .band90 { fill: var(--gold-soft); }
+  .median-line { stroke: var(--gold); stroke-width: 2.6; filter: drop-shadow(0 0 6px rgba(255,209,102,.5)); }
+  .mk { cursor: pointer; }
+  .mk rect { stroke: rgba(255,255,255,.5); stroke-width: 1; }
+  .mk:hover rect { stroke: #fff; stroke-width: 2; filter: drop-shadow(0 0 8px rgba(255,255,255,.5)); }
+  .mk text { fill: #fff; font-weight: 600; pointer-events: none;
+    paint-order: stroke; stroke: rgba(6,20,48,.75); stroke-width: 2.5px; }
+
+  .footer { color: var(--faint); font-size: 12.5px; padding: 8px 21px 22px; }
+
+  #popup {
+    position: fixed; z-index: 30; width: 470px; max-height: calc(100vh - 40px); overflow-y: auto;
+    background: rgba(8,28,66,.97); border: 1px solid rgba(255,209,102,.42);
+    border-radius: 16px; padding: 20px 22px; box-shadow: 0 24px 80px rgba(0,0,0,.6);
+    display: none;
+  }
+  #popup h3 { margin: 0 0 2px; font-size: 19px; }
+  #popup .meta { color: var(--dim); font-size: 13px; margin-bottom: 10px; }
+  #popup .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11.5px;
+    background: rgba(255,209,102,.14); border: 1px solid rgba(255,209,102,.35); margin: 0 6px 6px 0; }
+  #popup h4 { margin: 13px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.1px; color: var(--gold); }
+  #popup .summary { color: var(--ink); font-size: 13.5px; }
+  #popup .summary p { margin: 6px 0; }
+  #popup .summary ul { margin: 6px 0 6px 18px; padding: 0; }
+  #popup .summary li { margin: 3px 0; }
+  .subrow { display: flex; justify-content: space-between; gap: 10px; padding: 5px 8px;
+    border-radius: 8px; font-size: 12.5px; cursor: pointer; border: 1px solid transparent; }
+  .subrow:hover { background: rgba(255,209,102,.12); border-color: rgba(255,209,102,.35); }
+  .subrow .lbl { color: var(--dim); }
+  .subrow:hover .lbl { color: var(--ink); }
+  .subrow .val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .inferred-tag { color: var(--teal); font-size: 10.5px; margin-left: 6px; }
+  .ref { font-size: 12px; margin: 5px 0; word-break: break-all; }
+  .ref a { color: #ffd98a; text-decoration: none; }
+  .ref a:hover { text-decoration: underline; }
+  .ref .claim { color: var(--dim); display: block; font-size: 11.5px; word-break: normal; }
+  .close-x { position: absolute; top: 12px; right: 16px; cursor: pointer; color: var(--dim); font-size: 18px; }
+  .subwrap { border-bottom: 1px solid rgba(255,209,102,.12); }
+  .subrow { display: flex; align-items: center; gap: 4px; }
+  .subrow .lbl { flex: 1; min-width: 0; text-align: center; }
+  .subrow .val { flex: 0 0 auto; }
+  .dex { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 11px; width: 18px; padding: 0; }
+  .deriv { padding: 6px 4px 10px 22px; }
+  .ditem { display: grid; grid-template-columns: 84px 1fr; gap: 9px; margin: 8px 0; }
+  .dplot { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 11px; padding: 0 0 0 8px; }
+  .dnums { display: flex; flex-direction: column; gap: 1px; color: var(--dim); font-size: 11px; font-variant-numeric: tabular-nums; text-align: left; }
+  .ddate { color: var(--gold); }
+  .dtext { font-size: 12px; line-height: 1.45; }
+  .dkind { color: var(--dim); font-size: 11px; margin-top: 2px; }
+  .dctx .dtext { opacity: .62; }
+  .dtot { border-top: 1px solid rgba(255,209,102,.25); margin-top: 8px; padding-top: 6px; color: var(--dim); font-size: 11.5px; }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Ukraine Support in the 120th Congress (2027)</h1>
+      <div class="sub">Recorded stances of all 535 members-elect, on a scale where full support for Russia
+      is &#8722;1, neutrality is 0, and full support for Ukraine is 1. Yellow bands show the range of
+      uncertainty. Click any member for details and sources.</div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="field">
+      <label for="topic">Topic</label>
+      <select id="topic"></select>
+    </div>
+    <div class="field">
+      <label for="threshold">Voting threshold</label>
+      <select id="threshold">
+        <option value="simple">Simple majority</option>
+        <option value="veto">Veto-proof two-thirds</option>
+        <option value="cloture">Cloture (60 Senate; House 290)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="fcl">Full confidence level</label>
+      <div class="slider-box" title="There is always some degree of uncertainty toward any individual candidate's stances; this is assessed and stored as confidence levels - this is usually high, but occasionally low. A high confidence level - aka, above this threshold - is treated as the candidate always votes in line with their assessed stance on the issue. A zero confidence level is treated as a Monte Carlo simulation that random samples from members of the candidate's own party in their chamber. In between these levels, the two modes are blended.">
+        <input type="range" id="fcl" min="0.05" max="1" step="0.05" value="0.8">
+      </div>
+    </div>
+    <div class="key">
+      <div class="row"><span class="chip-line" style="background:var(--gold)"></span> Median maximum passable level</div>
+      <div class="row"><span class="chip-swatch" style="background:var(--gold-soft)"></span> 90% confidence range</div>
+      <div class="row"><span class="chip-swatch" style="background:var(--gold-faint); border:1px solid rgba(255,209,102,.3)"></span> 99% confidence range</div>
+      <div class="row"><span class="dot" style="background:var(--blue)"></span> Democrat
+        <span class="dot" style="background:var(--red)"></span> Republican
+        <span class="dot" style="background:var(--gray)"></span> Independent</div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chamber-title" id="senatePanel">U.S. Senate <small id="senateSub"></small></div>
+    <svg id="senateSvg"></svg>
+    <div class="scorebox">
+      <div class="score-line"><span class="score-main" id="senateScore"></span><span class="score-ranges" id="senateRanges"></span></div>
+      <div class="score-examples" id="senateExamples"></div>
+    </div>
+  </div>
+  <div class="chart-panel">
+    <div class="chamber-title" id="housePanel">U.S. House of Representatives <small id="houseSub"></small></div>
+    <svg id="houseSvg"></svg>
+    <div class="scorebox">
+      <div class="score-line"><span class="score-main" id="houseScore"></span><span class="score-ranges" id="houseRanges"></span></div>
+      <div class="score-examples" id="houseExamples"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Data: recorded stances from roll-call votes (2022&#8211;2026), statements and questionnaires, gathered
+    2026-11-06/07. Inferred subtopic values are
+    documented extrapolations from each member's own record, capped at 0.5 confidence, and are never
+    treated as observations. Members with no located Ukraine evidence are plotted at the median of their
+    respective parties with pale lettering and are evaluated as a Monte Carlo simulation of the stances of
+    the other members of their party.
+  </div>
+
+  <div id="popup">
+    <div class="close-x" id="popupClose">&#10005;</div>
+    <div id="popupBody"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
