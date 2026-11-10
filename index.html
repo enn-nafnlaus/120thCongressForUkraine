@@ -31,7 +31,7 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .sub { color: var(--dim); margin-top: 6px; }
-  .key {
+  .key { max-width: 252px; align-self: center; flex: 0 1 auto;
     display: flex; flex-direction: row; align-items: center; gap: 14px;
     margin-left: auto;
     background: var(--panel2); border: 1px solid rgba(255,209,102,.28);
@@ -51,13 +51,13 @@
     padding: 11px 14px; font-size: 15px; outline: none;
     backdrop-filter: blur(10px); box-shadow: 0 8px 26px rgba(0,0,0,.28);
   }
-  select { min-width: 320px; appearance: none; cursor: pointer; padding-right: 42px;
+  select { min-width: 210px; max-width: 235px; appearance: none; cursor: pointer; padding-right: 42px;
     background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
                       linear-gradient(135deg, var(--gold) 50%, transparent 50%);
     background-position: calc(100% - 22px) 22px, calc(100% - 16px) 22px;
     background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
   select option { background: #0a2c66; color: #f4f8ff; }
-  .slider-box { min-width: 320px; padding: 4px 14px 2px; }
+  .slider-box { min-width: 195px; max-width: 215px; padding: 4px 14px 2px; }
   input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 6px;
     background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--fill,50%), rgba(255,255,255,.18) var(--fill,50%));
     outline: none; margin: 14px 0 12px; }
@@ -167,7 +167,7 @@
       <select id="threshold">
         <option value="simple">Simple majority</option>
         <option value="veto">Veto-proof two-thirds</option>
-        <option value="cloture">Cloture (60 Senate; House 290)</option>
+        <option value="cloture" title="Senate cloture: 60 of 100; House suspension of the rules: 290 of 435">Cloture (60 / 290)</option>
       </select>
     </div>
     <div class="field">
