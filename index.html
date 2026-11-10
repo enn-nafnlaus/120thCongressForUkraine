@@ -74,6 +74,8 @@
     overflow-x: auto;
   }
   .chart-panel { position: relative; }
+  .zoomwrap { zoom: 0.75; }
+  #popup { zoom: 0.75; }
   .chamber-title {
     position: absolute; top: 6px; left: 10px; z-index: 5;
     background: rgba(14, 20, 36, 0.78); border: 1px solid rgba(255, 209, 102, 0.22);
@@ -157,6 +159,8 @@
     </div>
   </header>
 
+  <!-- EXPERIMENT: 75% UI scale (rollback: change zoom to 1) -->
+  <div class="zoomwrap">
   <div class="controls">
     <div class="field">
       <label for="topic">Topic</label>
@@ -203,6 +207,7 @@
     </div>
   </div>
 
+  </div><!-- /zoomwrap -->
   <div class="footer">
     Data: recorded stances from roll-call votes (2022&#8211;2026), statements and questionnaires, gathered
     2026-11-06/07. Inferred subtopic values are
