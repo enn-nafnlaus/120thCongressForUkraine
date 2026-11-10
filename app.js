@@ -488,8 +488,9 @@
           const boost = it.b ? " (x" + it.b + ")" : "";
           const nums = '<span class="ddate">' + esc(it.d || "") + '</span>' +
             "<span>" + sign + "</span><span>weight " + (it.s != null ? it.s.toFixed(2) : "?") + boost + "</span>";
+          const srclink = it.u ? ' \u00b7 <a class="dsrc" href="' + esc(it.u) + '" target="_blank" rel="noopener">source</a>' : "";
           h += line(nums, esc(it.w) + '<div class="dkind">' + esc((it.k || "").replace(/^./, (c) => c.toUpperCase())) +
-            " \u00b7 " + stance + "</div>");
+            " \u00b7 " + stance + srclink + "</div>");
         }
       } else {
         h += line("", "No evidence on this issue.");

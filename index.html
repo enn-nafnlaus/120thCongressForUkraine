@@ -31,13 +31,14 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .sub { color: var(--dim); margin-top: 2px; }
-  .key { flex: 1 1 360px; max-width: 520px; min-width: 300px; align-self: center; flex-wrap: wrap;
-    display: flex; flex-direction: row; align-items: center; gap: 14px;
+  .key { flex: 1 1 320px; max-width: 660px; min-width: 280px; align-self: center;
+    line-height: 1.9;
     margin-left: auto;
     background: var(--panel2); border: 1px solid rgba(255,209,102,.28);
     border-radius: 12px; padding: 6px 12px; font-size: 12.5px; color: var(--dim);
   }
-  .key .row { display: flex; align-items: center; gap: 7px; flex: 0 1 auto; }
+  .key .row { display: inline; margin-right: 14px; }
+  .chip-swatch, .chip-line { vertical-align: middle; margin-right: 5px; }
   .chip-swatch { width: 22px; height: 11px; border-radius: 6px; display: inline-block; }
   .chip-line { width: 22px; height: 3px; border-radius: 2px; display: inline-block; }
   .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,.35); }
