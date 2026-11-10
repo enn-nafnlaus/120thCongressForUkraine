@@ -121,7 +121,7 @@
   const MARGIN = { l: 70, r: 70, t: 2, b: 44 };
   // Temporary finder highlight: ?hi=<slug> or ?hi=statements (gold members with
   // a sourced statement on the current topic). Default 'statements' for now (remove later).
-  const HILITE = (typeof location !== "undefined" ? new URLSearchParams(location.search).get("hi") : null) || "statements";
+  const HILITE = (typeof location !== "undefined" ? new URLSearchParams(location.search).get("hi") : null) || "";
   function isHilited(it) {
     if (!HILITE) return false;
     if (HILITE === "statements") {
