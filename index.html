@@ -31,20 +31,21 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .sub { color: var(--dim); margin-top: 2px; }
-  .key { display: flex; flex-wrap: nowrap; align-items: center; gap: 10px;
-    justify-content: space-between;
-    flex: 1 1 auto; min-width: 0; margin: 0 8px;
+  .key { display: flex; flex-wrap: nowrap; align-items: center;
+    flex: 0 0 auto; min-width: 0;
     line-height: 1.55;
     background: var(--panel2); border: 1px solid rgba(255,209,102,.28);
     border-radius: 12px; padding: 6px 12px; font-size: 12.5px; color: var(--dim);
   }
-  .key .row { display: flex; align-items: center; gap: 6px; flex: 0 1 auto; min-width: 0; }
+  .key .row { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; margin-left: 14px; }
+  .key .row:first-child { margin-left: 0; }
   .chip-swatch, .chip-line { vertical-align: middle; margin-right: 5px; }
   .chip-swatch { width: 22px; height: 11px; border-radius: 6px; display: inline-block; }
   .chip-line { width: 22px; height: 3px; border-radius: 2px; display: inline-block; }
   .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,.35); }
 
-  .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 8px 10px 2px; }
+  .controls { display: flex; flex-wrap: nowrap; gap: 16px; align-items: end; padding: 8px 10px 2px; }
+  .spacer { flex: 1 1 auto; min-width: 0; }
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); font-weight: 600; }
   select, .slider-box {
@@ -182,6 +183,7 @@
         <input type="range" id="fcl" min="0.05" max="1" step="0.05" value="0.8">
       </div>
     </div>
+    <div class="spacer" aria-hidden="true"></div>
     <div class="key">
       <div class="row"><span class="chip-line" style="background:var(--gold)"></span> Median maximum passable level</div>
       <div class="row"><span class="chip-swatch" style="background:var(--gold-soft)"></span> 90% confidence range</div>
