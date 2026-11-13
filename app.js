@@ -490,7 +490,7 @@
           const stance = it.p === 0 ? "is neutral on"
             : (t === "oversight_accountability"
                 ? (it.p > 0 ? OVERSIGHT.pos : OVERSIGHT.neg)
-                : (it.p > 0 ? "supports" : "opposes")):
+                : (it.p > 0 ? "supports" : "opposes"));
           const sign = it.p > 0 ? "+" : (it.p < 0 ? "\u2212" : "0");
           const boost = it.b ? " (x" + it.b + ")" : "";
           const nums = '<span class="ddate">' + esc(it.d || "") + '</span>' +
