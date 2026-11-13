@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="r"><rect x="2" y="2" width="60" height="60" rx="14"/></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect x="0" y="0" width="64" height="32" fill="#005BBB"/>
+    <rect x="0" y="32" width="64" height="32" fill="#FFD500"/>
+  </g>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#061c46" stroke-width="3"/>
+  <!-- tryzub (simplified) -->
+  <g fill="none" stroke="#ffd166" stroke-width="3.4" stroke-linecap="round">
+    <path d="M32 8v12"/>
+    <path d="M32 20c-8 0-12 3-12 9 0 3.5 2 6 4.5 6.5C26 33 27.5 30.5 28 27"/>
+    <path d="M32 20c8 0 12 3 12 9 0 3.5-2 6-4.5 6.5C38 33 36.5 30.5 36 27"/>
+    <path d="M28 38v13"/>
+    <path d="M36 38v13"/>
+    <path d="M24 51h16"/>
+  </g>
+</svg>
