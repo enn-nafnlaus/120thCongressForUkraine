@@ -483,7 +483,14 @@
         h += line("", "No evidence on this issue. Estimated from the member\'s overall record, adjusted by how this issue tends to relate to overall among members of their party, and kept within the range the evidence covers.");
       } else if (d.items && d.items.length) {
         for (const it of d.items) {
-          const stance = it.p > 0 ? "supports" : (it.p < 0 ? "opposes" : "is neutral on");
+          // Pole-aware stance labels: these axes' + pole is an 'opposes' stance itself
+          // (opposes audit/restrictionist oversight of aid), so bare supports/opposes
+          // reads backwards there. Name the actual pole for each topic.
+          const OVERSIGHT = { pos: "opposes oversight conditions", neg: "supports oversight conditions" };
+          const stance = it.p === 0 ? "is neutral on"
+            : (t === "oversight_accountability"
+                ? (it.p > 0 ? OVERSIGHT.pos : OVERSIGHT.neg)
+                : (it.p > 0 ? "supports" : "opposes")):
           const sign = it.p > 0 ? "+" : (it.p < 0 ? "\u2212" : "0");
           const boost = it.b ? " (x" + it.b + ")" : "";
           const nums = '<span class="ddate">' + esc(it.d || "") + '</span>' +
