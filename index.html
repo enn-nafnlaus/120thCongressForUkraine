@@ -70,6 +70,19 @@
   input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%;
     background: #fff; border: 3px solid var(--gold); cursor: pointer; }
 
+  /* Small screens: let the controls row wrap onto additional lines so it
+     stays within the viewport. The legend itself keeps its single nowrap
+     line (per the table spec) but wraps as a unit to its own line. */
+  @media (max-width: 640px) {
+    .controls { flex-wrap: wrap; row-gap: 10px; }
+    .spacer { display: none; }
+    .key { order: 10; flex-basis: 100%; margin-top: 2px; }
+    select { min-width: 0; max-width: 100%; width: 100%; }
+    .slider-box { min-width: 0; max-width: 100%; width: 100%; }
+    .field { flex: 1 1 140px; }
+    body { font-size: 14px; }
+  }
+
   .chart-panel {
     margin: 2px 10px 6px; padding: 2px 12px 2px;
     background: var(--panel); border: 1px solid rgba(255,209,102,.22); border-radius: 18px;
